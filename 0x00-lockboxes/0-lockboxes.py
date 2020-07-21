@@ -14,7 +14,12 @@ def canUnlockAll(boxes):
                 for z in w:
                     keys.add(z)
             num += 1
-        if num_box not in keys:
-            return False
-        num_box += 1
+        if num_box == 0:
+            num_box += 1
+            if num_box not in keys:
+                return False
+        else:
+            if num_box not in keys:
+                return False
+            num_box += 1
     return True
