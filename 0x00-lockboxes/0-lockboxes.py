@@ -5,7 +5,7 @@ def canUnlockAll(boxes):
     """Lockboxes Holberton Interview"""
     num_box = 0
     keys = {0}
-    if boxes is None:
+    if boxes is None or boxes == []:
         return False
     for x in boxes:
         if num_box not in keys:
