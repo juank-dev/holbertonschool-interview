@@ -9,22 +9,108 @@
 
 heap_t *heap_insert(heap_t **root, int value)
 {
-	/* int full; */
+	int full;
 
-	/* full = binary_tree_is_full(*root); */
+	full = binary_tree_is_full(*root);
 	if (*root == NULL)
-		return (binary_tree_node(*root, value));
+	{
+		*root = binary_tree_node(*root, value);
+		return (*root);
+	}
 
-	if ((*root)->n < value)
-		binary_tree_insert_left((*root)->left, value);
-	/* else */
-	/* if (full == 0) */
-	/* { */
-	/*   /\* 	if (*root->left == NULL) *\/ */
-	/*   /\* binary_tree_insert *\/ */
-	/* } */
+	if (full == 1)
+		if (value > (*root)->n)
+			*root = binary_tree_insert_left(*root, value);
+		else
+			return (binary_tree_insert_left(*root, value));
+	else
+		if (value > (*root)->n)
+			*root = binary_tree_insert_right(*root, value);
+		else
+			return (binary_tree_insert_right(*root, value));
 	return (*root);
 }
+
+
+binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
+{
+	binary_tree_t *node = NULL;
+	/* binary_tree_t *tmp = NULL; */
+
+	if (parent == NULL)
+		return (NULL);
+
+	node = binary_tree_node(parent, value);
+	/* tmp = node; */
+	if (value > parent->n)
+	{
+		if (parent->left == NULL)
+		{
+			node->left = parent;
+			node->parent = parent->parent;
+			node->right = parent->right;
+			parent->parent = node;
+			parent->left = NULL;
+			parent->right = NULL;
+		}
+		else
+		{
+			binary_tree_insert_left(parent->left, value);
+		}
+	}
+	else
+	{
+		if (parent->left == NULL)
+			parent->left = node;
+		else
+			binary_tree_insert_left(parent->left, value);
+	}
+	return (node);
+}
+
+/**
+ * binary_tree_insert_right - function that inserts a node as the right-child
+ *
+ * @parent: node parent
+ * @value: value node
+ *
+ * Return: binary tree
+ */
+
+binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
+{
+	binary_tree_t *node = NULL;
+
+	if (parent == NULL)
+		return (NULL);
+
+	node = binary_tree_node(parent, value);
+	if (value > parent->n)
+	{
+		if (parent->right == NULL)
+		{
+			node->right = parent;
+			node->parent = parent->parent;
+			node->left = parent->left;
+			parent->parent = node;
+			parent->left = NULL;
+			parent->right = NULL;
+		}
+		else
+		{
+			binary_tree_insert_right(parent->right, value);
+		}
+	}
+	else
+	{
+		if (parent->right == NULL)
+			parent->right = node;
+		else
+			binary_tree_insert_right(parent->right, value);
+	}
+	return (node);
+}
+
 
 int binary_tree_is_full(const binary_tree_t *tree)
 {
@@ -43,62 +129,4 @@ int binary_tree_is_full(const binary_tree_t *tree)
 		}
 	}
 	return (0);
-}
-
-
-binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
-{
-	binary_tree_t *node = NULL;
-	binary_tree_t *tmp = NULL;
-
-	if (parent == NULL)
-		return (NULL);
-
-	node = binary_tree_node(parent, value);
-
-	if (parent->left == NULL)
-	{
-		parent->left = node;
-	}
-	else
-	{
-		tmp = parent->left;
-		tmp->parent = node;
-		parent->left = node;
-		node->left = tmp;
-	}
-	return (node);
-}
-
-/**
- * binary_tree_insert_right - function that inserts a node as the right-child
- *
- * @parent: node parent
- * @value: value node
- *
- * Return: binary tree
- */
-
-binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
-{
-	binary_tree_t *node = NULL;
-	binary_tree_t *tmp = NULL;
-
-	if (parent == NULL)
-		return (NULL);
-
-	node = binary_tree_node(parent, value);
-
-	if (parent->right == NULL)
-	{
-		parent->right = node;
-	}
-	else
-	{
-		tmp = parent->right;
-		tmp->parent = node;
-		parent->right = node;
-		node->right = tmp;
-	}
-	return (node);
 }
