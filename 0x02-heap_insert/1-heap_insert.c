@@ -36,9 +36,26 @@ heap_t *heap_insert(heap_t **root, int value)
 
 binary_tree_t *binary_tree_validation(binary_tree_t *tree, int value)
 {
+	binary_tree_t *node;
 	int num1, num2, full, full1;
+	
+	
+
 	if (tree->left && tree->right)
 	{
+		if (value > tree->n)
+		{
+			node = binary_tree_node(tree, value);
+			node->parent = tree->parent;
+			node->left = tree->left;
+			node->right = tree;
+			tree->parent =node;
+			tree->left->parent = node;
+			tree->left = tree->right->left;
+			tree->left->parent = tree;
+			tree->right->left = NULL;
+			return(node);
+	    }
 		num1 = binary_tree_height(tree->left);
 		num2 = binary_tree_height(tree->right);
 		full = binary_tree_is_perfect(tree->left);
