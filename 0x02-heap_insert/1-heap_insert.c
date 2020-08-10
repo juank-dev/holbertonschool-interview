@@ -1,8 +1,8 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_node -  function that creates a binary tree node
- * @parent: Pointer to the parent node
+ * heap_insert -  function that insert a node in binary tree
+ * @root: Pointer to the root node
  * @value: Value node
  * Return: Always 0 (Success)
  */
@@ -27,98 +27,87 @@ heap_t *heap_insert(heap_t **root, int value)
 	{
 		if (value > (*root)->n)
 			*root = binary_tree_validation(*root, value);
-			
 		else
 			return (binary_tree_validation(*root, value));
 	}
 	return (*root);
 }
 
+/**
+ * binary_tree_validation -  function that validate a binary tree node
+ * @tree: Pointer to the tree node
+ * @value: Value node
+ * Return: Always 0 (Success)
+ */
 binary_tree_t *binary_tree_validation(binary_tree_t *tree, int value)
 {
-	binary_tree_t *node;
 	int num1, num2, full, full1;
-	
-	
 
 	if (tree->left && tree->right)
 	{
-		if (value > tree->n)
-		{
-			node = binary_tree_node(tree, value);
-			node->parent = tree->parent;
-			node->left = tree->left;
-			node->right = tree;
-			tree->parent =node;
-			tree->left->parent = node;
-			tree->left = tree->right->left;
-			tree->left->parent = tree;
-			tree->right->left = NULL;
-			return(node);
-	    }
 		num1 = binary_tree_height(tree->left);
 		num2 = binary_tree_height(tree->right);
 		full = binary_tree_is_perfect(tree->left);
 		full1 = binary_tree_is_perfect(tree->right);
 		if (num1 == num2 && full1)
 		{
-			return(binary_tree_validation(tree->left, value));
+			return (binary_tree_validation(tree->left, value));
 		}
-		else if(num1 == num2 && full1 == 0)
-			return(binary_tree_validation(tree->right, value));
+		else if (num1 == num2 && full1 == 0)
+			return (binary_tree_validation(tree->right, value));
 		else if (full == 0)
 		{
-			return(binary_tree_validation(tree->left, value));
+			return (binary_tree_validation(tree->left, value));
 		}
-		else 
-			return(binary_tree_validation(tree->right, value));
+		else
+			return (binary_tree_validation(tree->right, value));
 	}
 	else
-	{	
+	{
 		if (tree->left == NULL)
 			return (binary_tree_insert_left(tree, value));
 		if (tree->right == NULL)
 			return (binary_tree_insert_right(tree, value));
 	}
-	return(0);
+	return (0);
 }
+
+/**
+ * binary_tree_insert_left - function that inserts a node as the left-child
+ *
+ * @parent: node parent
+ * @value: value node
+ *
+ * Return: binary tree
+ */
 
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 {
 	binary_tree_t *node = NULL;
-	/* binary_tree_t *tmp = NULL; */
 
 	if (parent == NULL)
 		return (NULL);
-	
-	/* tmp = node; */
 	if (value > parent->n)
 	{
 		if (parent->left == NULL)
 		{
-
 			node = binary_tree_node(parent, value);
 			node->left = parent;
 			node->parent = parent->parent;
 			node->right = parent->right;
-			
-              
 			if (parent->parent != NULL)
 			{
-			  	if (parent->parent->parent != NULL)
-              		parent->parent->left = node;
+				if (parent->parent->parent != NULL)
+					parent->parent->left = node;
 				else
 					parent->parent->right = node;
 			}
 			parent->parent = node;
 			parent->left = NULL;
 			parent->right = NULL;
-			
 		}
 		else
-		{
 			node = binary_tree_insert_left(parent->left, value);
-		}
 	}
 	else
 	{
@@ -148,7 +137,6 @@ binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 
 	if (parent == NULL)
 		return (NULL);
-	
 	if (value > parent->n)
 	{
 		if (parent->right == NULL)
@@ -158,16 +146,14 @@ binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 			node->parent = parent->parent;
 			node->left = parent->left;
 			if (parent->parent != NULL)
-              parent->parent->left = node;
+				parent->parent->left = node;
 			parent->left->parent = node;
 			parent->parent = node;
 			parent->left = NULL;
 			parent->right = NULL;
 		}
 		else
-		{
 			node = binary_tree_insert_right(parent->right, value);
-		}
 	}
 	else
 	{
@@ -209,25 +195,6 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	if (height_2 > height_1)
 		return (height_2);
 	return (height_1);
-}
-
-
-/**
- * _pow - function that return pow
- *
- * @h: height
- *
- * Return: Always 0(Success)
- **/
-
-int _pow(int h)
-{
-	int i, result = 1;
-
-	for (i = 0; i < h; i++)
-		result = 2 * result;
-
-	return (result);
 }
 
 /**
