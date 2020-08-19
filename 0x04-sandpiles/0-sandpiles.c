@@ -1,5 +1,11 @@
 #include "sandpiles.h"
 
+/**
+ * _print_grid - final grid result
+ * @grid: final result of the grid step
+ * Return: void statement
+ */
+
 static void print_grid(int grid[3][3])
 {
     int i, j;
@@ -26,21 +32,15 @@ static void print_grid(int grid[3][3])
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
 
-    int x = 0;
-    int y = 0;
-    
-    int status;
-
-    for (x = 0; x < 3; x++)
-    {  
-        for(y = 0; y < 3; y++)
-        {
-            grid1[x][y] = grid1[x][y] + grid2[x][y];
-        }
-    }
+    int x = 0 , y = 0, status;
 
     while(1)
-    {
+    {   
+        for (x = 0; x < 3; x++)
+        {  
+            for(y = 0; y < 3; y++)
+                grid1[x][y] = grid1[x][y] + grid2[x][y], grid2[x][y] = 0;
+        }
         status = validation(grid1);
         if(status)
         {
@@ -54,25 +54,27 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
                     {
                         grid1[x][y] = grid1[x][y] - 4;
                         if((x + 1 >= 0) && (x + 1 < 3))
-                            grid1[x + 1][y]++;
+                            grid2[x + 1][y]++;
                         if(((x - 1 >= 0) && (x - 1 < 3)))
-                            grid1[x - 1][y]++;
+                            grid2[x - 1][y]++;
                         if(((y + 1 >= 0) && (y + 1 < 3)))
-                            grid1[x][y+1]++;
+                            grid2[x][y+1]++;
                         if(((y - 1 >= 0) && (y - 1 < 3)))    
-                            grid1[x][y-1]++;
+                            grid2[x][y-1]++;
                     }
                 }
             }
-            
-            
-        
         }
         else
             break;
     }
 }
 
+/**
+ * validation - make that sanpile will be stable
+ * @grid: bidimensional array
+ * Return: void statement
+ */
 int validation(int grid[3][3]) 
 {
     int x, y;
