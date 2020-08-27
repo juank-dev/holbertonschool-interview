@@ -12,34 +12,38 @@ int is_palindrome(listint_t **head)
 {
     listint_t  *left = *head;
     listint_t *right = *head;
-    int len = 0, max = 0;
-    while (left != NULL)
-    {
-        max += 1;
-        left = left->next;
-    }
+    int len = 0, num;
+    
     left = *head;
-    return(recursive(left, right, max, len));
-
+    num = recursive(left, right, len);
+    if(num)
+        return(1);
+    return(0);
 }
 
-int recursive(listint_t *left, listint_t *right, int max, int len)
+/**
+ * recursive - checks if a singly linked list is a palindrome
+ * @left: head of the singly linked list
+ * @right: tail of the singly linked list
+ * @int: value of the singly linked list
+ *
+ * Return: 0 if it is not a palindrome, 1 if it is a palindrome
+ **/
+int recursive(listint_t *left, listint_t *right, int len)
 {
-    int count = 0, num = 0;
+    int count = 0, num = len;
     if(right != NULL)
     {
         len++;
-        num = recursive(left, right->next, max, len);
-        if(max / 2 < len)
-            return(num);
-        if ( num == 0)
+        num = recursive(left, right->next, len);
+        if (num == 0)
             return(0);
     }
     else
-        return(1);
+        return(num);
     
      
-    while(count < max - len)
+    while(count < num - len)
     {
        left = left->next;
        count++;
@@ -47,7 +51,7 @@ int recursive(listint_t *left, listint_t *right, int max, int len)
     
     if(left->n == right->n)
     {
-        return(1);
+        return(num);
     }
     else
         return(0);
