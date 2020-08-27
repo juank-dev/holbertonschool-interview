@@ -10,37 +10,43 @@
  **/
 int is_palindrome(listint_t **head)
 {
-	listint_t  *left = *head;
-	listint_t *right = *head;
+    listint_t  *left = *head;
+    listint_t *right = *head;
+    int len = 0, max = 0;
+    while (left != NULL)
+    {
+        max += 1;
+        left = left->next;
+    }
+    left = *head;
+    return(recursive(left, right, max, len));
 
-	int length = 0, length2;
-	int count = 1, count2 = 1;
+}
 
-	while (left != NULL)
-	{
-		length += 1;
-		left = left->next;
-	}
-
-	left = *head;
-	length2 = length;
-
-	while (length / 2 >= count2)
-	{
-		while (length2 > count)
-		{
-			count++;
-			right = right->next;
-		}
-
-		if (left->n != right->n)
-			return (0);
-
-		left = left->next;
-		right = *head;
-		length2 = length - count2;
-		count2++;
-		count = 1;
-	}
-	return (1);
+int recursive(listint_t *left, listint_t *right, int max, int len)
+{
+    int count = 0;
+    if(right != NULL)
+    {
+        len++;
+        if (recursive(left, right->next, max, len) == 0)
+            return(0);
+    }
+    else
+        return(1);
+    
+     
+    while(count < max - len)
+    {
+       left = left->next;
+       count++;
+    }
+    
+    if(left->n == right->n)
+    {
+        return(1);
+    }
+    else
+        return(0);
+    
 }
