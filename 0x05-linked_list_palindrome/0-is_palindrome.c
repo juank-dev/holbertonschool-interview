@@ -16,7 +16,7 @@ int is_palindrome(listint_t **head)
     
     left = *head;
     num = recursive(left, right, len);
-    if(num)
+    if(num || *head == NULL)
         return(1);
     return(0);
 }
