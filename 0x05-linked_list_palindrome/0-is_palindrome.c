@@ -36,6 +36,8 @@ int recursive(listint_t *left, listint_t *right, int len)
     {
         len++;
         num = recursive(left, right->next, len);
+        if (num / 2 < len)
+            return(num);
         if (num == 0)
             return(0);
     }
