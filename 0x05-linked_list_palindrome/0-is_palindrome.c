@@ -25,11 +25,14 @@ int is_palindrome(listint_t **head)
 
 int recursive(listint_t *left, listint_t *right, int max, int len)
 {
-    int count = 0;
+    int count = 0, num = 0;
     if(right != NULL)
     {
         len++;
-        if (recursive(left, right->next, max, len) == 0)
+        num = recursive(left, right->next, max, len);
+        if(max / 2 < len)
+            return(num);
+        if ( num == 0)
             return(0);
     }
     else
@@ -48,5 +51,4 @@ int recursive(listint_t *left, listint_t *right, int max, int len)
     }
     else
         return(0);
-    
 }
