@@ -14,17 +14,20 @@ if __name__ == '__main__':
         """Validation computes metrics and print stadistics"""
         for line in sys.stdin:
             word = line.split()
-            size += int(word[-1])
-            for status in my_dict.keys():
-                if (word[-2] == status):
-                    my_dict[status] += 1
-            if count == 10:
-                print("File size: {}".format(size))
-                sorted(my_dict)
-                for status, variable in my_dict.items():
-                    if variable != 0:
-                        print("{}: {}".format(status, variable))
-                count = 0
+            try:
+                size += int(word[-1])
+                for status in my_dict.keys():
+                    if (word[-2] == status):
+                        my_dict[status] += 1
+                if count == 10:
+                    print("File size: {}".format(size))
+                    sorted(my_dict)
+                    for status, variable in my_dict.items():
+                        if variable != 0:
+                            print("{}: {}".format(status, variable))
+                    count = 0
+            except:
+                pass
             count += 1
     except KeyboardInterrupt:
         """Keyboard interrupt"""
