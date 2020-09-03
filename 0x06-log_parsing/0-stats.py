@@ -21,6 +21,7 @@ if __name__ == '__main__':
                     my_dict[status] += 1
             if count == 10:
                 print("File size: {}".format(size))
+                sorted(my_dict)
                 for status, variable in my_dict.items():
                     if variable != 0:
                         print("{}: {}".format(status, variable))
