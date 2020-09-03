@@ -33,4 +33,4 @@ if __name__ == '__main__':
         for status, variable in my_dict.items():
             if variable != 0:
                 print("{}: {}".format(status, variable))
-        exit(0)
+        raise
