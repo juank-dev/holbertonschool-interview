@@ -3,8 +3,6 @@
     line and computes metrics"""
 
 import sys
-import signal
-
 
 size, count = 0, 0
 var200, var301, var400, var401 = 0, 0, 0, 0
@@ -33,4 +31,4 @@ except KeyboardInterrupt:
     for status, variable in my_dict.items():
         if variable != 0:
             print("{}: {}".format(status, variable))
-    sys.exit()
+    exit(0)
