@@ -5,7 +5,7 @@
 if __name__ == '__main__':
     import sys
 
-    size, count = 0, 0
+    size, count = 0, 1
 
     my_dict = {"200": 0, "301": 0, "400": 0, "401": 0,
                "403": 0, "404": 0, "405": 0, "500": 0}
@@ -15,16 +15,16 @@ if __name__ == '__main__':
         for line in sys.stdin:
             word = line.split()
             size += int(word[-1])
+
+            for status in my_dict.keys():
+                if (word[-2] == status):
+                    my_dict[status] += 1
             if count == 10:
                 print("File size: {}".format(size))
                 for status, variable in my_dict.items():
                     if variable != 0:
                         print("{}: {}".format(status, variable))
                 count = 0
-            for status in my_dict.keys():
-                if (word[-2] == status):
-                    my_dict[status] += 1
-
             count += 1
     except KeyboardInterrupt:
         """Keyboard interrupt"""
