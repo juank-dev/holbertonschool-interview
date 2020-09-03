@@ -18,7 +18,7 @@ if __name__ == '__main__':
             for status in my_dict.keys():
                 if (word[-2] == status):
                     my_dict[status] += 1
-            if not line or count == 10:
+            if count == 10:
                 print("File size: {}".format(size))
                 sorted(my_dict)
                 for status, variable in my_dict.items():
@@ -26,7 +26,7 @@ if __name__ == '__main__':
                         print("{}: {}".format(status, variable))
                 count = 0
             count += 1
-    except (KeyboardInterrupt, StopIteration):
+    except KeyboardInterrupt:
         """Keyboard interrupt"""
         print("File size: {}".format(size))
         for status, variable in my_dict.items():
