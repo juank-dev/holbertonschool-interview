@@ -4,11 +4,12 @@
 
 if __name__ == '__main__':
     import sys
+    import collections
 
     size, count = 0, 1
 
-    my_dict = {"200": 0, "301": 0, "400": 0, "401": 0,
-               "403": 0, "404": 0, "405": 0, "500": 0}
+    my_dict = {"500": 0, "301": 0, "400": 0, "401": 0,
+               "403": 0, "404": 0, "405": 0, "200": 0}
 
     try:
         """Validation computes metrics and print stadistics"""
@@ -21,8 +22,8 @@ if __name__ == '__main__':
                         my_dict[status] += 1
                 if count == 10:
                     print("File size: {}".format(size))
-                    sorted(my_dict)
-                    for status, variable in my_dict.items():
+                    od = collections.OrderedDict(sorted(my_dict.items()))
+                    for status, variable in od.items():
                         if variable != 0:
                             print("{}: {}".format(status, variable))
                     count = 0
@@ -32,11 +33,13 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         """Keyboard interrupt"""
         print("File size: {}".format(size))
-        for status, variable in my_dict.items():
+        od = collections.OrderedDict(sorted(my_dict.items()))
+        for status, variable in od.items():
             if variable != 0:
                 print("{}: {}".format(status, variable))
         raise
     print("File size: {}".format(size))
-    for status, variable in my_dict.items():
+    od = collections.OrderedDict(sorted(my_dict.items()))
+    for status, variable in od.items():
         if variable != 0:
             print("{}: {}".format(status, variable))
