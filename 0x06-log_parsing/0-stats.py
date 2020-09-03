@@ -1,47 +1,36 @@
 #!/usr/bin/python3
-""" script that reads stdin line by line and computes metrics """
+"""Log parsing Write a script that reads stdin line by
+    line and computes metrics"""
 
 if __name__ == '__main__':
-
     import sys
 
-    def print_results(statusCodes, fileSize):
-        """ Print statistics """
-        print("File size: {:d}".format(fileSize))
-        for statusCode, times in sorted(statusCodes.items()):
-            if times:
-                print("{:s}: {:d}".format(statusCode, times))
-
-    statusCodes = {"200": 0,
-                   "301": 0,
-                   "400": 0,
-                   "401": 0,
-                   "403": 0,
-                   "404": 0,
-                   "405": 0,
-                   "500": 0
-                   }
-    fileSize = 0
-    n_lines = 0
+    size, count = 0, 0
+    var200, var301, var400, var401 = 0, 0, 0, 0
+    var403, var404, var405, var500 = 0, 0, 0, 0
+    my_dict = {"200": var200, "301": var301, "400": var400, "401": var401,
+               "403": var403, "404": var404, "405": var405, "500": var500}
 
     try:
-        """ Read stdin line by line """
+        """Validation computes metrics and print stadistics"""
         for line in sys.stdin:
-            if n_lines != 0 and n_lines % 10 == 0:
-                """ After every 10 lines, print from the beginning """
-                print_results(statusCodes, fileSize)
-            n_lines += 1
-            data = line.split()
-            try:
-                """ Compute metrics """
-                statusCode = data[-2]
-                if statusCode in statusCodes:
-                    statusCodes[statusCode] += 1
-                fileSize += int(data[-1])
-            except:
-                pass
-        print_results(statusCodes, fileSize)
+            word = line.split()
+            size += int(word[-1])
+            if count == 10:
+                print("File size: {}".format(size))
+                for status, variable in my_dict.items():
+                    if variable != 0:
+                        print("{}: {}".format(status, variable))
+                count = 0
+            for status in my_dict.keys():
+                if (word[-2] == status):
+                    my_dict[status] += 1
+
+            count += 1
     except KeyboardInterrupt:
-        """ Keyboard interruption, print from the beginning """
-        print_results(statusCodes, fileSize)
+        """Keyboard interrupt"""
+        print("File size: {}".format(size))
+        for status, variable in my_dict.items():
+            if variable != 0:
+                print("{}: {}".format(status, variable))
         raise
