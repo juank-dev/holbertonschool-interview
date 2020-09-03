@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Log parsing Write a script that reads stdin line by line and computes metrics"""
+
 import sys
 import signal
 
@@ -9,16 +11,7 @@ var403, var404, var405, var500 = 0, 0, 0, 0
 my_dict = {"200": var200, "301": var301, "400": var400, "401": var401,
            "403": var403, "404": var404, "405": var405, "500": var500}
 
-"""
-def keyboardInterruptHandler(signal, frame):
-    print("KeyboardInterrupt (ID: {}) has been caught. Cleaning up...".format(signal))
-    print(my_dyct["200"])
-    return(1)
 
-
-signal.signal(signal.SIGINT, keyboardInterruptHandler)
-
-"""
 try:
     for line in sys.stdin:
         word = line.split()
