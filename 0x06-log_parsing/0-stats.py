@@ -39,4 +39,3 @@ if __name__ == '__main__':
             if variable != 0:
                 print("{}: {}".format(status, variable))
         exit(0)
-
