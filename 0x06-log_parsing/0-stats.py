@@ -38,3 +38,4 @@ if __name__ == '__main__':
         """Keyboard interrupt"""
         print_stadistics(size, my_dict)
         exit(0)
+    print_stadistics(size, my_dict)
