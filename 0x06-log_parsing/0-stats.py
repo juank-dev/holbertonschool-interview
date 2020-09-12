@@ -25,7 +25,7 @@ if __name__ == '__main__':
                     od = collections.OrderedDict(sorted(my_dict.items()))
                     for status, variable in od.items():
                         if variable != 0:
-                print("{}: {}".format(status, variable))
+                            print("{}: {}".format(status, variable))
 
                     count = 0
             except:
@@ -36,4 +36,7 @@ if __name__ == '__main__':
         print("File size: {}".format(size))
         od = collections.OrderedDict(sorted(my_dict.items()))
         for status, variable in od.items():
-            if variable != 0:            
+            if variable != 0:
+                print("{}: {}".format(status, variable))
+        exit(0)
+
