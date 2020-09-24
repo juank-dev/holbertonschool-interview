@@ -24,7 +24,7 @@ def validUTF8(data):
     validate UTF-8
     """
     for number in range(len(data)):
-        tmp_num = data[number]
+        tmp_num = data[number] & 255
         tmp = tmp_num >> 7
 
         if (int("{0:b}".format(tmp)) == 0):
