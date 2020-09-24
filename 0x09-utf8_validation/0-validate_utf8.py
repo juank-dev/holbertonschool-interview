@@ -4,18 +4,19 @@ Validate UTF-8
 """
 
 
-def validation(data, number, tmp, bytes):
+def validation(data, number, bytes):
     tmp_list = []
     try:
         for x in range(bytes):
-            tmp_list.append(int("{0:b}".format(data[number + (x + 1)] >> 6)))
+            tmp_list.append(
+                int("{0:b}".format((data[number + (x + 1)] & 255) >> 6)))
 
         for val in tmp_list:
             if val != 10:
                 return(0)
         number += bytes
         return(number)
-    except:
+    except IndexError:
         return(-1)
 
 
@@ -23,8 +24,7 @@ def validUTF8(data):
     """
     validate UTF-8
     """
-    if len(data) == 0:
-        return('False')
+
     for number in range(len(data)):
         tmp_num = data[number] & 255
         tmp = tmp_num >> 7
@@ -33,21 +33,21 @@ def validUTF8(data):
             continue
         tmp = tmp_num >> 5
         if(int("{0:b}".format(tmp)) == 110):
-            number = validation(data, number, tmp, 1)
+            number = validation(data, number, 1)
             if number == -1 or number == 0:
                 return('False')
             continue
 
         tmp = tmp_num >> 4
         if(int("{0:b}".format(tmp)) == 1110):
-            number = validation(data, number, tmp, 2)
+            number = validation(data, number, 2)
             if number == -1 or number == 0:
                 return('False')
             continue
 
         tmp = tmp_num >> 3
         if(int("{0:b}".format(tmp)) == 11110):
-            number = validation(data, number, tmp, 3)
+            number = validation(data, number, 3)
             if number == -1 or number == 0:
                 return('False')
             continue
