@@ -26,7 +26,8 @@ def validUTF8(data):
         if(int("{0:b}".format(tmp)) == 1110):
             tmp = data[number + 1] >> 6
             tmp_2 = data[number + 2] >> 6
-            if int("{0:b}".format(tmp)) == 10 and int("{0:b}".format(tmp_2)) == 10:
+            if int("{0:b}".format(tmp)) == 10 and
+            int("{0:b}".format(tmp_2)) == 10:
                 number += 2
                 continue
             else:
@@ -36,7 +37,9 @@ def validUTF8(data):
             tmp = data[number + 1] >> 6
             tmp_2 = data[number + 2] >> 6
             tmp_3 = data[number + 2] >> 6
-            if int("{0:b}".format(tmp)) == 10 and int("{0:b}".format(tmp_2)) == 10 and int("{0:b}".format(tmp_3)) == 10:
+            if int("{0:b}".format(tmp)) == 10 and
+            int("{0:b}".format(tmp_2)) == 10 and
+            int("{0:b}".format(tmp_3)) == 10:
                 number += 3
                 continue
             else:
