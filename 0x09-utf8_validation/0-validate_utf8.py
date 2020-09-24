@@ -23,6 +23,8 @@ def validUTF8(data):
     """
     validate UTF-8
     """
+    if len(data) == 0:
+        return('False')
     for number in range(len(data)):
         tmp_num = data[number] & 255
         tmp = tmp_num >> 7
