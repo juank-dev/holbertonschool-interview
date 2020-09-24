@@ -24,22 +24,20 @@ def validUTF8(data):
                 return('False')
         tmp = tmp_num >> 4
         if(int("{0:b}".format(tmp)) == 1110):
-            tmp = data[number + 1] >> 6
-            tmp_2 = data[number + 2] >> 6
-            if int("{0:b}".format(tmp)) == 10 and
-            int("{0:b}".format(tmp_2)) == 10:
+            tmp = int("{0:b}".format(data[number + 1] >> 6))
+            tmp_2 = int("{0:b}".format(data[number + 2] >> 6))
+            if tmp == 10 and tmp_2 == 10:
                 number += 2
                 continue
             else:
                 return('False')
         tmp = tmp_num >> 3
         if(int("{0:b}".format(tmp)) == 11110):
-            tmp = data[number + 1] >> 6
-            tmp_2 = data[number + 2] >> 6
-            tmp_3 = data[number + 2] >> 6
-            if int("{0:b}".format(tmp)) == 10 and
-            int("{0:b}".format(tmp_2)) == 10 and
-            int("{0:b}".format(tmp_3)) == 10:
+            tmp = int("{0:b}".format(data[number + 1] >> 6))
+            tmp_2 = int("{0:b}".format(data[number + 2] >> 6))
+            tmp_3 = int("{0:b}".format(data[number + 3] >> 6))
+
+            if tmp == 10 and tmp_2 == 10 and tmp_3 == 10:
                 number += 3
                 continue
             else:
