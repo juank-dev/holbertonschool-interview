@@ -1,5 +1,5 @@
 #include "slide_line.h"
-
+#include <stddef.h>
 
 /**
  * slide_line - Prints out an array of integer, followed by a new line
