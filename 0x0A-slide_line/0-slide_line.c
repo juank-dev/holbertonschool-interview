@@ -1,16 +1,19 @@
 #include "slide_line.h"
-#include <stddef.h>
+
 
 /**
  * slide_line - Prints out an array of integer, followed by a new line
+ *
  * @line: Pointer to the array of integer to be printed
  * @size: Number of elements in @array
  * @direction: direction
- * Return: EXIT_SUCCESS or EXIT_FAILURE
+ *
+ * Return: 0 - EXIT_SUCCESS or 1 - EXIT_FAILURE
  */
 int slide_line(int *line, size_t size, int direction)
 {
 	int list[size], i = 0, j = 0, k = 0, num = 0, size_n = size;
+
 	if (line == NULL)
 		return (0);
 	if (direction == 0)
