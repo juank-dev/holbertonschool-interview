@@ -12,7 +12,8 @@
  */
 int slide_line(int *line, size_t size, int direction)
 {
-	int list[size], i = 0, j = 0, k = 0, num = 0, size_n = size;
+	int list[size], i = 0, j = 0, k = 0, num = 0;
+	int size_n = (int) size;
 
 	if (line == NULL)
 		return (0);
