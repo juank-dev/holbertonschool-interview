@@ -1,5 +1,5 @@
 #include "slide_line.h"
-#include <stddef.h>
+
 
 /**
  * slide_line - Prints out an array of integer, followed by a new line
@@ -8,6 +8,7 @@
  * @direction: direction
  * Return: EXIT_SUCCESS or EXIT_FAILURE
  */
+
 int slide_line(int *line, size_t size, int direction)
 {
 	int list[size], i = 0, j = 0, k = 0, num = 0, size_n = size;
