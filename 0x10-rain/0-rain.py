@@ -33,6 +33,6 @@ def rain(walls):
             y += 1
             z += 1
         if tmp:
-            rain += max * tmp - 1
-        x += y - 1
+            rain += (max * tmp - 1)
+        x = y - 1
     return rain
