@@ -3,38 +3,34 @@
 Project: Rain
 """
 
+def validation(new_list: list):
+    """Validate a list"""
+    count = 0
+    first_list = []
+    for x in new_list:
+        if x > 0 or count != 0:
+            first_list.append(x)
+            count += 1
+    count = 0
+    second_list = []
+    for y in reversed(first_list):
+        if y > 0 or count != 0:
+            second_list.append(y)
+            count += 1
+    return second_list
 
 def rain(walls):
     """Function: calculate how much water will be retained
     after it rains.
     """
-    if len(walls) == 0:
-        return 0
-    x, rain, count, maximo = 0, 0, 0, 0
-    walls.append(0)
-    walls.append(0)
-
-    while x < len(walls) - 1:
-        if walls[x] <= walls[x + 1]:
-            x += 1
-            continue
-        y = x + 2
-        z, tmp = 1, 0
-        while y < len(walls) - 1:
-            if walls[x] <= walls[y]:
-                store = (walls[x] * z) - sum(walls[x + 1:y])
-                rain += store
-                tmp = 0
-                break
-            else:
-                tmp += 1
-                if walls[y] > maximo:
-                    maximo = walls[y]
-                    index = y - x - 1
-                    new_y = y
-            y += 1
-            z += 1
-        if tmp:
-            rain += (maximo * index) - sum(walls[x + 1:new_y])
-        x = y - 1
+    count = 0
+    maximo = max(walls)
+    rain = 0
+    for x in range(maximo):
+        new_list = validation(walls)
+        
+        for w in new_list:
+            if w <= 0:
+                rain += 1
+        walls = [element - 1 for element in new_list]
     return rain
