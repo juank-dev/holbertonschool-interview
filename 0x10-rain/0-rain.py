@@ -20,7 +20,7 @@ def validation(new_list: list):
     return second_list
 
 def rain(walls):
-    """Function: calculate how much water will be retained
+    """Function: Calculate how much water will be retained
     after it rains.
     """
     count = 0
