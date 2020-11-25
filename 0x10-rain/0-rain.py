@@ -10,7 +10,7 @@ def rain(walls):
     """
     if len(walls) == 0:
         return 0
-    x, rain, count, max = 0, 0, 0, 0
+    x, rain, count, maximo = 0, 0, 0, 0
     walls.append(0)
     walls.append(0)
 
@@ -28,12 +28,13 @@ def rain(walls):
                 break
             else:
                 tmp += 1
-                if walls[y] > max:
-                    max = walls[y]
-                    index = y - x
+                if walls[y] > maximo:
+                    maximo = walls[y]
+                    index = y - x - 1
+                    new_y = y
             y += 1
             z += 1
         if tmp:
-            rain += (max * index - 1)
+            rain += (maximo * index) - sum(walls[x + 1:new_y])
         x = y - 1
     return rain
