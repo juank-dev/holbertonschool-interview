@@ -2,8 +2,6 @@
 """
 Project: Rain
 """
-if len(walls) == 0:
-    return 0
 
 
 def validation(new_list: list):
@@ -27,6 +25,9 @@ def rain(walls):
     """Function: Calculate how much water will be retained
     after it rains.
     """
+    if len(walls) == 0:
+        return 0
+
     count = 0
     maximo = max(walls)
     rain = 0
