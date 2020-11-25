@@ -2,6 +2,9 @@
 """
 Project: Rain
 """
+if len(walls) == 0:
+    return 0
+
 
 def validation(new_list: list):
     """Validate a list"""
@@ -19,6 +22,7 @@ def validation(new_list: list):
             count += 1
     return second_list
 
+
 def rain(walls):
     """Function: Calculate how much water will be retained
     after it rains.
@@ -28,7 +32,7 @@ def rain(walls):
     rain = 0
     for x in range(maximo):
         new_list = validation(walls)
-        
+
         for w in new_list:
             if w <= 0:
                 rain += 1
