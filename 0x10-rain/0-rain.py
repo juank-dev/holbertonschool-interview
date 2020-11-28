@@ -4,25 +4,28 @@ Project: Rain
 """
 
 
-def validation(new_list: list):
+def validation(new_list: list) -> list:
     """Validate a list"""
-    count = 0
+    count = False
     first_list = []
     for x in new_list:
-        if x > 0 or count != 0:
-            first_list.append(x)
-            count += 1
-    count = 0
+        if x <= 0 and count is False:
+            continue
+        first_list.append(x)
+        count = True
+    
+    count = False
     second_list = []
     for y in reversed(first_list):
-        if y > 0 or count != 0:
-            second_list.append(y)
-            count += 1
+        if x <= 0 and count is False:
+            continue
+        second_list.append(x)
+        count = True
     return second_list
 
 
 def rain(walls):
-    """Function: Calculate how much water will be retained
+    """Function: Calculate  how much water will be retained
     after it rains.
     """
     if len(walls) == 0:
