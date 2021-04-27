@@ -1,6 +1,6 @@
 #include "sort.h"
 /**
- * funtion swap - swaps elements
+ * _swap - swaps elements
  * @i: first element
  * @j: second element
  */
