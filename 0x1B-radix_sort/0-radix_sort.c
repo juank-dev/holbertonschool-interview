@@ -1,6 +1,5 @@
 #include "sort.h"
 
-
 /**
  * radix_sort - sorts an array of integers in ascending order
  * using the Radix sort algorithm implement the LSD radix sort algorithm
@@ -17,7 +16,7 @@ void radix_sort(int *array, size_t size)
 	max = getMax(array, size);
 	for (i = 1; max / i > 0; i *= 10)
 	{
-		count(array, size, i);
+		counting(array, size, i);
 		print_array(array, size);
 	}
 }
@@ -42,13 +41,13 @@ int getMax(int *array, size_t size)
 }
 
 /**
- * count - count sort of the array
+ * counting - counting sort of the array
  * @array: the array to sort
  * @size: size of the array
  * @exp: digit to count around
  * Return: Nothing
  */
-void count(int *array, int size, int exp)
+void counting(int *array, int size, int exp)
 {
 	int *output = malloc(sizeof(int) * size);
 	int i;
